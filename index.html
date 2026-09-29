@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choirunnisa Azzahra — Portfolio</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#150e13;
+    --bg-2:#1e141b;
+    --surface:#251821;
+    --surface-2:#2d1d28;
+    --text:#f8eef3;
+    --muted:#b395a8;
+    --accent:#f5a3c7;
+    --accent-2:#ec4899;
+    --accent-soft:rgba(245,163,199,.12);
+    --border:rgba(245,163,199,.18);
+    --radius:16px;
+    --shadow:0 20px 60px -15px rgba(236,72,153,.25);
+    --nav-bg:rgba(21,14,19,.8);
+  }
+  html[data-theme="light"]{
+    --bg:#fdf2f7;
+    --bg-2:#f9e8f0;
+    --surface:#ffffff;
+    --surface-2:#fdf0f6;
+    --text:#3b1f30;
+    --muted:#8a6b7f;
+    --accent:#db2777;
+    --accent-2:#be185d;
+    --accent-soft:rgba(219,39,119,.08);
+    --border:rgba(219,39,119,.15);
+    --shadow:0 20px 60px -15px rgba(236,72,153,.2);
+    --nav-bg:rgba(253,242,247,.85);
+  }
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;transition:background .4s ease,color .4s ease}
+  ::selection{background:var(--accent-2);color:#fff}
+  .container{max-width:920px;margin:0 auto;padding:0 24px}
+  section{padding:90px 0}
+  h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1}
+  h2{font-size:clamp(1.4rem,4vw,2rem);margin-bottom:12px;font-weight:700;letter-spacing:-.5px}
+  .muted{color:var(--muted)}
+  a{color:var(--accent);text-decoration:none}
+  .gradient-text{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .section-tag{font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.active{opacity:1;transform:translateY(0)}
+
+  /* NAV */
+  header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .3s ease}
+  header.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);box-shadow:0 4px 30px rgba(0,0,0,.08)}
+  header .container{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:920px}
+  .brand{font-weight:800;font-size:1.15rem;letter-spacing:-.5px}
+  .brand span{color:var(--accent)}
+  header nav{display:flex;gap:4px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:5px}
+  header nav a{padding:8px 16px;border-radius:999px;color:var(--muted);font-size:.88rem;font-weight:600;transition:all .25s ease;position:relative}
+  header nav a:hover,.nav-active{color:var(--text);background:var(--accent-soft)}
+  .theme-toggle{background:var(--surface);border:1px solid var(--border);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .3s ease;color:var(--text)}
+  .theme-toggle:hover{transform:scale(1.1) rotate(15deg);border-color:var(--accent)}
+  .nav-wrap{display:flex;align-items:center;gap:12px}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+  .blob{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(100px);opacity:.35;animation:float 8s ease-in-out infinite;pointer-events:none}
+  .blob.b1{background:var(--accent-2);top:-150px;left:-100px}
+  .blob.b2{background:var(--accent);bottom:-150px;right:-100px;animation-delay:-4s}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.1)}}
+  #hero .inner{position:relative;z-index:2;animation:heroIn .9s cubic-bezier(.16,1,.3,1)}
+  @keyframes heroIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .avatar{width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin-bottom:24px;box-shadow:var(--shadow);transition:transform .3s ease}
+  .avatar:hover{transform:scale(1.05)}
+  #hero h1{margin-bottom:16px}
+  .typed-wrap{min-height:2.2rem;margin-bottom:18px}
+  .typed{font-size:clamp(1.1rem,3.5vw,1.5rem);font-weight:600;color:var(--accent)}
+  .cursor{display:inline-block;width:3px;height:1.2em;background:var(--accent);margin-left:3px;vertical-align:middle;animation:blink .8s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  #hero .sub{color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:1.05rem}
+  .btn{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;padding:13px 30px;border-radius:999px;font-weight:700;border:none;cursor:pointer;font-size:1rem;transition:all .3s ease;box-shadow:0 8px 25px -8px var(--accent-2)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px var(--accent-2);text-decoration:none}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none}
+  .btn-ghost:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:1.3rem;animation:bounce 2s infinite;z-index:2}
+  @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+  /* ABOUT */
+  #about{background:var(--bg-2)}
+  .about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:36px;align-items:start}
+  .about-img-wrap{position:relative;aspect-ratio:1/1;max-width:420px}
+  .about-img-wrap img{width:100%;height:100%;border-radius:var(--radius);border:1px solid var(--border);display:block}
+  .about-img-wrap::after{content:'';position:absolute;inset:0;border-radius:var(--radius);background:linear-gradient(135deg,rgba(245,163,199,.2),transparent);pointer-events:none}
+  .bio-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:.93rem}
+  .bio-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+  .bio-table td:first-child{color:var(--accent);font-weight:700;width:38%;white-space:nowrap}
+  .bio-table td:last-child{color:var(--text)}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .tag{background:var(--accent-soft);border:1px solid var(--border);padding:7px 16px;border-radius:999px;font-size:.85rem;font-weight:600;color:var(--accent);transition:all .25s ease}
+  .tag:hover{transform:translateY(-2px);border-color:var(--accent)}
+
+  /* PRODUCTS */
+  .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;margin-top:32px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative}
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--accent)}
+  .card .img-wrap{overflow:hidden;height:190px}
+  .card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .card:hover img{transform:scale(1.06)}
+  .card .info{padding:18px}
+  .card h3{font-size:1.05rem;margin-bottom:6px;font-weight:700}
+  .card .desc{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+  .card .price{color:var(--accent);font-weight:800;font-size:1.05rem}
+
+  /* CONTACT */
+  #contact{text-align:center}
+  .socials{display:flex;justify-content:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+  .socials a{background:var(--surface);border:1px solid var(--border);padding:12px 24px;border-radius:999px;color:var(--muted);font-weight:600;font-size:.92rem;transition:all .3s ease;display:inline-flex;align-items:center;gap:8px}
+  .socials a:hover{color:var(--text);border-color:var(--accent);background:var(--accent-soft);transform:translateY(-3px);text-decoration:none}
+
+  footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:.85rem}
+
+  /* MUSIC PLAYER */
+  .player{position:fixed;bottom:18px;right:18px;z-index:900;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:10px 18px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);backdrop-filter:blur(10px);transition:all .3s ease}
+  .player:hover{transform:translateY(-3px)}
+  .player button{background:none;border:none;color:var(--text);font-size:1.15rem;cursor:pointer;padding:4px 6px;transition:transform .2s ease}
+  .player button:hover{transform:scale(1.2)}
+  .player .track{font-size:.82rem;color:var(--muted);max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+  .player input[type=range]{width:70px;accent-color:var(--accent-2);cursor:pointer}
+  .vinyl{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;animation:spin 4s linear infinite;animation-play-state:paused}
+  .vinyl.playing{animation-play-state:running}
+
+  /* PRELOADER */
+  #preloader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .6s ease,visibility .6s ease}
+  #preloader.done{opacity:0;visibility:hidden}
+  .loader-vinyl{width:90px;height:90px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--accent);animation:spin .8s linear infinite;position:relative}
+  .loader-vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--accent)}
+  .loader-text{font-size:.85rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);animation:fadePulse 1.4s ease-in-out infinite}
+  @keyframes fadePulse{0%,100%{opacity:.4}50%{opacity:1}}
+  .loader-name{font-size:1.3rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* MUSIC SECTION */
+  .music-card{display:flex;gap:36px;align-items:center;max-width:680px;margin:36px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;position:relative;overflow:hidden}
+  .music-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,var(--accent-soft),transparent 60%);pointer-events:none}
+  .vinyl-large{position:relative;width:180px;height:180px;flex-shrink:0;border-radius:50%;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,.6),0 0 0 8px var(--surface-2),0 0 0 9px var(--border);animation:spin 6s linear infinite;animation-play-state:paused;transition:box-shadow .4s ease}
+  .vinyl-large.playing{animation-play-state:running;box-shadow:0 25px 60px -12px rgba(236,72,153,.5),0 0 0 8px var(--surface-2),0 0 0 9px var(--accent)}
+  .vinyl-large img{width:100%;height:100%;object-fit:cover;display:block}
+  .vinyl-large::after{content:'';position:absolute;inset:0;background:repeating-radial-gradient(circle at center,transparent 0,transparent 6px,rgba(0,0,0,.08) 7px,transparent 8px);pointer-events:none}
+  .vinyl-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--accent);z-index:2;box-shadow:0 0 0 3px var(--surface)}
+  .music-info{position:relative;z-index:2}
+  .music-info h3{font-size:1.35rem;margin-bottom:8px;font-weight:700}
+  .music-info p{font-size:.92rem;margin-bottom:3px}
+  .music-play-btn{font-size:.92rem;padding:11px 26px}
+  .wavebars{display:flex;align-items:flex-end;gap:4px;height:36px;margin-top:18px}
+  .wavebars span{flex:1;max-width:8px;height:12%;border-radius:999px;background:linear-gradient(to top,var(--accent),var(--accent-2));opacity:.5;transition:opacity .3s ease}
+  .wavebars.active span{animation:wavedance 1s ease-in-out infinite;opacity:1}
+  .wavebars.active span:nth-child(odd){animation-duration:.7s}
+  .wavebars.active span:nth-child(3n){animation-duration:1.3s}
+  .wavebars.active span:nth-child(4n){animation-duration:.9s;animation-delay:.3s}
+  .wavebars.active span:nth-child(5n){animation-delay:.5s}
+  @keyframes wavedance{0%,100%{height:12%}50%{height:100%}}
+
+  @media(max-width:700px){
+    .music-card{flex-direction:column;text-align:center;gap:24px;padding:24px}
+    .vinyl-large{width:140px;height:140px}
+    .wavebars{justify-content:center}
+    .music-info{text-align:center}
+    .about-grid{grid-template-columns:1fr}
+    header nav a{padding:7px 10px;font-size:.8rem}
+    .brand{font-size:1rem}
+    .nav-wrap{gap:8px}
+    .player{right:10px;left:10px;justify-content:center;border-radius:16px}
+    .player .track{display:none}
+    section{padding:70px 0}
+    .bio-table td:first-child{width:45%}
+  }
+  @media(max-width:480px){
+    header .container{flex-direction:column;gap:10px}
+  }
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="loader-vinyl"></div>
+  <div class="loader-name">Choirunnisa Azzahra</div>
+  <div class="loader-text">Loading</div>
+</div>
+
+<header id="header">
+  <div class="container">
+    <span class="brand">Choirunnisa<span>.</span></span>
+    <div class="nav-wrap">
+      <nav id="nav">
+        <a href="#hero" class="nav-active">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Produk</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" title="Ganti tema">🌙</button>
+    </div>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="container inner">
+    <img class="avatar" src="assets/fotoprofile.jpg" alt="Foto Choirunnisa">
+    <h1>Halo, saya <span class="gradient-text">Choirunnisa Azzahra</span></h1>
+    <div class="typed-wrap"><span class="typed" id="typed"></span><span class="cursor"></span></div>
+    <p class="muted sub">Siswi Teknik Jaringan Komputer dan Telekomunikasi yang aktif belajar ilmu komputer dan suka mencoba hal baru.</p>
+    <a href="#products" class="btn">Lihat Produk</a>
+    <a href="#about" class="btn btn-ghost" style="margin-left:10px">About Me</a>
+  </div>
+  <div class="scroll-hint">⌄</div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="assets/fotoprofile.jpg" alt="Foto terbaru Choirunnisa" style="object-fit:cover">
+      </div>
+      <div class="reveal">
+        <span class="section-tag">About</span>
+        <h2>Tentang Saya</h2>
+        <p class="muted">Saya adalah seorang siswi yang aktif belajar ilmu komputer. Saya selalu bersemangat mempelajari hal-hal baru dan ingin menjadi seseorang yang bisa menggunakan dan mengetahui isi komputer, karena itu salah satu alasan saya untuk memperdalam ilmu komputer. Saya juga sangat suka mencoba sesuatu.</p>
+        <table class="bio-table">
+          <tr><td>Nama</td><td>Choirunnisa Azzahra</td></tr>
+          <tr><td>TTL</td><td>Pekanbaru, 8 April 2011</td></tr>
+          <tr><td>Alamat</td><td>JL. Sri Kurnia, Perumahan Agro Sakinah Blok D No 3</td></tr>
+          <tr><td>Jurusan</td><td>Teknik Jaringan Komputer dan Telekomunikasi</td></tr>
+          <tr><td>Cita-cita</td><td>Dokter</td></tr>
+          <tr><td>Hobi</td><td>Memasak &amp; Badminton</td></tr>
+          <tr><td>Makanan</td><td>Nasi goreng &amp; Mie goreng</td></tr>
+          <tr><td>Agama</td><td>Islam</td></tr>
+          <tr><td>Kewarganegaraan</td><td>WNI</td></tr>
+          <tr><td>Jenis Kelamin</td><td>Perempuan</td></tr>
+          <tr><td>Lagu Favorit</td><td>My Love Mine All Mine — Mitski</td></tr>
+        </table>
+        <div class="skill-tags">
+          <span class="tag">👩‍🍳 Memasak</span>
+          <span class="tag">🏸 Badminton</span>
+          <span class="tag">💻 Jaringan Komputer</span>
+          <span class="tag">📚 Belajar Hal Baru</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-tag">Katalog</span>
+      <h2>Produk Saya</h2>
+      <p class="muted">Pilihan produk terbaik, harga ramah di kantong.</p>
+    </div>
+    <div class="products" id="product-grid"></div>
+  </div>
+</section>
+
+<section id="music" style="background:var(--bg-2)">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-tag">Musik Favorit</span>
+      <h2>Lagu Favorit Saya</h2>
+    </div>
+    <div class="music-card reveal">
+      <div class="vinyl-large" id="vinyl-large">
+        <img src="assets/album.jpg" alt="Album cover">
+        <div class="vinyl-dot"></div>
+      </div>
+      <div class="music-info">
+        <h3>My Love Mine All Mine</h3>
+        <p class="muted">Penyanyi: <strong style="color:var(--text)">Mitski</strong></p>
+        <p class="muted">Album: The Land Is Inhospitable and So Are We</p>
+        <p class="muted">Rilis: 15 September 2023</p>
+        <div class="wavebars" id="wavebars">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <button class="btn music-play-btn" id="music-play-btn" style="margin-top:18px">▶ Putar Lagu</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+</section>
+
+<footer>
+  <div class="container">© 2026 Choirunnisa Azzahra — Dibuat dengan 💗</div>
+</footer>
+
+<div class="player">
+  <div class="vinyl" id="vinyl">🎵</div>
+  <button id="play-btn" title="Play/Pause">▶</button>
+  <span class="track" id="track-name">Belum ada lagu</span>
+  <input type="range" id="volume" min="0" max="100" value="50">
+</div>
+<audio id="audio" loop></audio>
+
+<script>
+/* ===== PRODUK ===== */
+const products = [
+  { name:"Dimsum Ayam", price:"Rp 15.000", img:"assets/dimsum1.jpg", desc:"Dimsum isi ayam, lembut dan gurih." },
+  { name:"Dimsum Udang", price:"Rp 18.000", img:"assets/dimsum2.jpg", desc:"Dimsum isi udang, manis dan segar." },
+  { name:"Dimsum Spesial", price:"Rp 20.000", img:"assets/dimsum3.jpg", desc:"Campuran ayam dan udang, terlaris!" },
+  { name:"Dimsum Keju", price:"Rp 17.000", img:"assets/dimsum4.jpg", desc:"Dimsum leleh keju, anak suka." },
+  { name:"Dimsum Pedas", price:"Rp 18.000", img:"assets/dimsum5.jpg", desc:"Untuk yang suka pedas." },
+  { name:"Dimsum Sayur", price:"Rp 14.000", img:"assets/dimsum6.jpg", desc:"Isi sayur, lebih sehat." },
+  { name:"Dimsum Telur", price:"Rp 15.000", img:"assets/dimsum7.jpg", desc:"Isi telur, simple dan enak." },
+  { name:"Dimsum Porsi Keluarga", price:"Rp 50.000", img:"assets/dimsum8.jpg", desc:"Isi 10 pcs, hemat untuk keluarga." },
+];
+const grid = document.getElementById('product-grid');
+products.forEach((p,i) => {
+  const card = document.createElement('div');
+  card.className = 'card reveal';
+  card.style.transitionDelay = (i*0.08)+'s';
+  card.innerHTML = `<div class="img-wrap"><img src="${p.img}" alt="${p.name}"></div>
+    <div class="info"><h3>${p.name}</h3><p class="desc">${p.desc}</p><span class="price">${p.price}</span></div>`;
+  grid.appendChild(card);
+});
+
+/* ===== TYPING EFFECT ===== */
+const phrases = ["Siswi TJKT 🌸","Calon Dokter 💊","Pecinta Masakan 🍳","Pemain Badminton 🏸"];
+const typedEl = document.getElementById('typed');
+let pi=0, ci=0, deleting=false;
+function type(){
+  const cur = phrases[pi];
+  if(!deleting){ typedEl.textContent = cur.slice(0,++ci); if(ci===cur.length){ deleting=true; setTimeout(type,1800); return; } }
+  else { typedEl.textContent = cur.slice(0,--ci); if(ci===0){ deleting=false; pi=(pi+1)%phrases.length; } }
+  setTimeout(type, deleting?45:75);
+}
+type();
+
+/* ===== SCROLL REVEAL ===== */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('active'); io.unobserve(e.target); } }), {threshold:.15});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ===== NAV ===== */
+const header = document.getElementById('header');
+const navLinks = document.querySelectorAll('#nav a');
+const sections = ['hero','about','products'].map(id => document.getElementById(id));
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+  const y = window.scrollY + 120;
+  sections.forEach((sec,i) => {
+    if(y >= sec.offsetTop && y < sec.offsetTop + sec.offsetHeight){
+      navLinks.forEach(a => a.classList.remove('nav-active'));
+      navLinks[i].classList.add('nav-active');
+    }
+  });
+});
+
+/* ===== THEME TOGGLE ===== */
+const toggle = document.getElementById('theme-toggle');
+toggle.addEventListener('click', () => {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  toggle.textContent = dark ? '☀️' : '🌙';
+});
+
+/* ===== MUSIC PLAYER ===== */
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('play-btn');
+const trackName = document.getElementById('track-name');
+const volume = document.getElementById('volume');
+const vinyl = document.getElementById('vinyl');
+const SONG_URL = "assets/lagu.mp3";
+const SONG_NAME = "Musik Kesukaan";
+audio.src = SONG_URL;
+trackName.textContent = SONG_NAME;
+
+// Autoplay: mulai muted (browser izinkan), lalu unmute
+const vinylLarge = document.getElementById('vinyl-large');
+const wavebars = document.getElementById('wavebars');
+const musicBtn = document.getElementById('music-play-btn');
+
+function setPlaying(on){
+  playBtn.textContent = on ? '⏸' : '▶';
+  vinyl.classList.toggle('playing', on);
+  vinylLarge.classList.toggle('playing', on);
+  wavebars.classList.toggle('active', on);
+  musicBtn.textContent = on ? '⏸ Lagu Sedang Diputar' : '▶ Putar Lagu';
+}
+
+function startMusic(){
+  // Trick: mulai muted (browser izinkan), lalu unmute
+  audio.muted = true;
+  audio.volume = 0;
+  audio.play().then(() => {
+    setPlaying(true);
+    audio.muted = false;
+    audio.volume = volume.value/100;
+  }).catch(() => {
+    // Fallback: ada browser tetap blok, tunggu klik pertama
+    audio.muted = false;
+    const startOnce = () => {
+      audio.play().then(() => {
+        setPlaying(true);
+        audio.volume = volume.value/100;
+      }).catch(() => {});
+      document.removeEventListener('click', startOnce);
+      document.removeEventListener('touchstart', startOnce);
+      window.removeEventListener('scroll', startOnce);
+      window.removeEventListener('keydown', startOnce);
+    };
+    ['click','touchstart','scroll','keydown'].forEach(e =>
+      window.addEventListener(e, startOnce, {once:true, passive:true}));
+  });
+}
+startMusic();
+/* ===== PRELOADER + AUTOPLAY ===== */
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  setTimeout(() => {
+    preloader.classList.add('done');
+    setTimeout(() => preloader.style.display = 'none', 700);
+    // Mulai musik tepat setelah loading hilang
+    startMusic();
+  }, 1400);
+});
+
+musicBtn.addEventListener('click', () => {
+  if(audio.paused){ audio.play().then(() => setPlaying(true)).catch(() => {}); }
+  else { audio.pause(); setPlaying(false); }
+});
+
+playBtn.addEventListener('click', () => {
+  if(audio.paused){ audio.play().then(() => setPlaying(true)).catch(() => {}); }
+  else { audio.pause(); setPlaying(false); }
+});
+volume.addEventListener('input', () => audio.volume = volume.value/100);
+audio.volume = .5;
+</script>
+
+</body>
+</html>
